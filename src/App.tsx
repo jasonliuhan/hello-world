@@ -1,49 +1,19 @@
-/* 类组件使用redux */
-
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { rootState } from "./store";
-import { IUser, IUserActionType } from "./store/reducers/user";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-interface IProps {
-  user: IUser;
-  changeName?: (name: string) => void;
-}
+import Home from "./views/home/home";
+import About from "./views/about/about"
 
-class ClassComp extends Component<IProps> {
-  protected handleChangeName(name: string) {
-    this.props.changeName && this.props.changeName(name);
-  }
+export default class App extends Component {
   render() {
-    const { name } = this.props.user;
     return (
-      <div>
-        {name}
-        <br />
-        <button
-          onClick={() => {
-            this.handleChangeName("张三");
-          }}
-        >
-          ClassComp改变名字
-        </button>
-      </div>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/about" element={<About />}></Route>
+      </Routes>
+    </BrowserRouter>
     );
   }
 }
-
-const mapStateToProps = (state: rootState) => {
-  return { ...state.user };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  changeName: (name: string) => {
-    dispatch({
-      type: IUserActionType.CHANGE,
-      payload: { name },
-    });
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ClassComp);
