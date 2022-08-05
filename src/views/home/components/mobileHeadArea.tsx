@@ -26,9 +26,13 @@ class MobileHeadArea extends React.Component {
               <PopContent>Share anything, anytime, anywhere.</PopContent>
             </PopInfo>
           </PopText>
-          <PopButton src={HeadButton} />
+          <PopButton src={HeadButton} onClick={jumpOut.bind(this,'https://play.google.com/store/apps/details?id=com.start.pop')} />
           <PopPhone src={HeadPhone} />
-          <PopAnnotations>Terms of Service & Privacy Policy.</PopAnnotations>
+          <PopAnnotations>
+            <text onClick={jumpOut.bind(this,'https://www.app-privacy-policy.com/live.php?token=yvVQTONdZyKEBQn3zholTUcedrY9SpO5')}>Terms of Service</text>
+            <text> & </text>
+            <text onClick={jumpOut.bind(this,'http://privacypolicy.popshots.io/')}>Privacy Policy.</text>
+            </PopAnnotations>
         </MobileHeadBlock>
       </>
     );
